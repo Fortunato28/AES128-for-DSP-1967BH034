@@ -3,7 +3,7 @@
 #include <math.h>
 #include "aes128.h"
 
-#define LENGTH 754 // длина открытого текста
+#define LENGTH 80 // длина открытого текста
 
 void encriptData(void *opentext, int len, void *ciphertext); // Хз, как тут с типами указателей
  
@@ -21,7 +21,7 @@ void main( void )
 
 
 /**
-  * @brief  Получение длины шифротекста для выделения памяти под него
+  * @brief  Получение длины шифротекста для выделения памяти под него, в соответствии с PKCS7
   * @param  Длина открытого текста len
   * @retval Длина шифротекста
   */
@@ -30,14 +30,14 @@ int getCipherLength(int len)
 	int cipherLength = len;
 	int shortageUpToMultiplicity = 16 - (len % 16); // Недостаток до кратности 128
 	
-	if(len % 16 != 0) // Если требуется дополнение
+	if(len % 16 != 0) // Кратность 128 битам
 	{
 		cipherLength += shortageUpToMultiplicity; // Увеличиваем длину последнего блока
-		
-		if(shortageUpToMultiplicity < 3) // Если требуется ещё один блок. 3 - волшебное, от фонаря
-			cipherLength += 16; // То будет ещё один блок, состоящий чисто из дополнения
 	}
-	
+	else
+	{
+		cipherLength += 16; // Добавляем целый блок, если длина сообщения кратна 128 битам
+	}
 		return cipherLength;
 }
 
