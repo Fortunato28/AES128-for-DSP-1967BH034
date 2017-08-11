@@ -68,9 +68,9 @@ int encriptData(void *opentext, int len) // нужно здесь указывать, что ссылки на
 	uint8_t buff[4 * Nb]; // Буфер для блока открытых данных
 	uint8_t blockShortageUpToMultiplicity = 16 - (len % 16); // Недостаток последнего блока до кратности 128
 	
-	int cipherLength = getCipherLength(len);
+	int cipherLength = getCipherLength(len); // Получение длины шифротекста
 	int numberOfBlocks = cipherLength / 16; // Количество блоков шифротекста
-	ciphertext = malloc(cipherLength); // Количество памяти, выделяемой под блок шифротекста кратно 128 битам
+	ciphertext = malloc(cipherLength); // Количество памяти, выделяемой под блок шифротекста, кратно 128 битам
 	
 
 	// Идём по блокам
@@ -102,13 +102,7 @@ int encriptData(void *opentext, int len) // нужно здесь указывать, что ссылки на
 		}
 		else
 		{
-			
-			/*
-			printf("Test buff\n");
-			for(j = 0; j < 16; ++j)
-				printf("%x", *(buff + j));
-				*/
-			encript_block(buff, ciphertext, w); // Уходит всё правильно
+			encript_block(buff, ciphertext, w); // Последний блок посылаем отдельно из-за дополения
 		}
 		
 		/*for(j = 0; j < 16; ++j)
