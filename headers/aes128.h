@@ -14,4 +14,12 @@ int encript_block(uint8_t input[4 * Nb], uint8_t output[4 * Nb], int w[Nb * (Nr 
 
 int decript_block(uint8_t input[4 * Nb], uint8_t output[4 * Nb], int w[Nb * (Nr + 1)]);
 
+int encriptData(void *opentext, int len);
+
+int getCipherLength(int len);
+
+int decriptData(void *ciphertext, int cipherLength);
+
+int getCipherLength(int len);
+
 #endif //__AES_128_H__
