@@ -10,16 +10,12 @@
 
 int keyExpansion(uint8_t key[4 * Nk], int w[Nb * (Nr + 1)]);
 
-int encript_block(uint8_t input[4 * Nb], uint8_t output[4 * Nb], int w[Nb * (Nr + 1)]);
+int encrypt_block(uint8_t input[4 * Nb], uint8_t output[4 * Nb], int w[Nb * (Nr + 1)]);
 
-int decript_block(uint8_t input[4 * Nb], uint8_t output[4 * Nb], int w[Nb * (Nr + 1)]);
+int decrypt_block(uint8_t input[4 * Nb], uint8_t output[4 * Nb], int w[Nb * (Nr + 1)]);
 
-int encriptData(void *opentext, int len);
+uint32_t encryptData(void *opentext, uint32_t len);
 
-int getCipherLength(int len);
-
-int decriptData(void *ciphertext, int cipherLength);
-
-int getCipherLength(int len);
+uint32_t decryptData(void *ciphertext, uint32_t cipherLength);
 
 #endif //__AES_128_H__
